@@ -28,8 +28,6 @@ flutter:
       android:
         package: com.mapbox.mapboxgl
         pluginClass: MapboxMapsPlugin
-      ios:
-        pluginClass: MapboxMapsPlugin
       web:
         default_package: mapbox_gl_web
 
