@@ -14,8 +14,7 @@ class LatLng {
   /// The longitude is normalized to the half-open interval from -180.0
   /// (inclusive) to +180.0 (exclusive)
   const LatLng(double latitude, double longitude)
-      : latitude =
-            (latitude < -90.0 ? -90.0 : (90.0 < latitude ? 90.0 : latitude)),
+      : latitude = (latitude < -90.0 ? -90.0 : (90.0 < latitude ? 90.0 : latitude)),
         longitude = (longitude + 180.0) % 360.0 - 180.0;
 
   /// The latitude in degrees between -90.0 and 90.0, both inclusive.
@@ -53,7 +52,7 @@ class LatLng {
   }
 
   @override
-  int get hashCode => hashValues(latitude, longitude);
+  int get hashCode => Object.hash(latitude, longitude);
 }
 
 /// A latitude/longitude aligned rectangle.
@@ -69,8 +68,7 @@ class LatLngBounds {
   ///
   /// The latitude of the southwest corner cannot be larger than the
   /// latitude of the northeast corner.
-  LatLngBounds({required this.southwest, required this.northeast})
-      : assert(southwest.latitude <= northeast.latitude);
+  LatLngBounds({required this.southwest, required this.northeast}) : assert(southwest.latitude <= northeast.latitude);
 
   /// The southwest corner of the rectangle.
   final LatLng southwest;
@@ -100,13 +98,11 @@ class LatLngBounds {
 
   @override
   bool operator ==(Object o) {
-    return o is LatLngBounds &&
-        o.southwest == southwest &&
-        o.northeast == northeast;
+    return o is LatLngBounds && o.southwest == southwest && o.northeast == northeast;
   }
 
   @override
-  int get hashCode => hashValues(southwest, northeast);
+  int get hashCode => Object.hash(southwest, northeast);
 }
 
 /// A geographical area representing a non-aligned quadrilateral
@@ -128,12 +124,7 @@ class LatLngQuad {
   final LatLng bottomLeft;
 
   dynamic toList() {
-    return <dynamic>[
-      topLeft.toJson(),
-      topRight.toJson(),
-      bottomRight.toJson(),
-      bottomLeft.toJson()
-    ];
+    return <dynamic>[topLeft.toJson(), topRight.toJson(), bottomRight.toJson(), bottomLeft.toJson()];
   }
 
   @visibleForTesting
@@ -164,7 +155,7 @@ class LatLngQuad {
   }
 
   @override
-  int get hashCode => hashValues(topLeft, topRight, bottomRight, bottomLeft);
+  int get hashCode => Object.hash(topLeft, topRight, bottomRight, bottomLeft);
 }
 
 /// User's observed location
