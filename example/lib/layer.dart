@@ -35,8 +35,7 @@ class LayerState extends State {
       dragEnabled: false,
       myLocationEnabled: true,
       onMapCreated: _onMapCreated,
-      onMapClick: (point, latLong) =>
-          print(point.toString() + latLong.toString()),
+      onMapClick: (point, latLong) => print(point.toString() + latLong.toString()),
       onStyleLoadedCallback: _onStyleLoadedCallback,
       initialCameraPosition: CameraPosition(
         target: center,
@@ -69,7 +68,7 @@ class LayerState extends State {
     await controller.addGeoJsonSource("moving", _movingFeature(0));
 
     //new style of adding sources
-    await controller.addSource("fills", GeojsonSourceProperties(data: _fills));
+    await controller.addSource("fills", GeojsonSourceProperties(data: _fills, cluster: false, clusterRadius: 0));
 
     await controller.addFillLayer(
       "fills",
@@ -90,17 +89,15 @@ class LayerState extends State {
     await controller.addLineLayer(
       "fills",
       "lines",
-      LineLayerProperties(
-          lineColor: Colors.lightBlue.toHexStringRGB(),
-          lineWidth: [
-            Expressions.interpolate,
-            ["linear"],
-            [Expressions.zoom],
-            11.0,
-            2.0,
-            20.0,
-            10.0
-          ]),
+      LineLayerProperties(lineColor: Colors.lightBlue.toHexStringRGB(), lineWidth: [
+        Expressions.interpolate,
+        ["linear"],
+        [Expressions.zoom],
+        11.0,
+        2.0,
+        20.0,
+        10.0
+      ]),
     );
 
     await controller.addCircleLayer(
